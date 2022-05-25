@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./App.module.css";
 import poweredImage from "./assets/powered.png";
+import { levels, calculateBmi } from "./helpers/bmi";
 
 const App = () => {
   const [heightField, setHeightField] = useState<number>(0);
