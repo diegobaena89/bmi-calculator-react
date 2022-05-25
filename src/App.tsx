@@ -45,6 +45,7 @@ const App = () => {
             placeholder="Enter your height. Ex: 1.5 (in meters)"
             value={heightField > 0 ? heightField : ""}
             onChange={(e) => setHeightField(parseFloat(e.target.value))}
+            disabled={toShow ? true : false}
           />
 
           <input
@@ -52,9 +53,15 @@ const App = () => {
             placeholder="Enter your weight. Ex: 75,3 (in kg)"
             value={weightField > 0 ? weightField : ""}
             onChange={(e) => setWeightField(parseFloat(e.target.value))}
+            disabled={toShow ? true : false}
           />
 
-          <button onClick={handleCalculateButton}>Calculate</button>
+          <button
+            onClick={handleCalculateButton}
+            disabled={toShow ? true : false}
+          >
+            Calculate
+          </button>
         </div>
         <div className={styles.rightSide}>
           {!toShow && (
