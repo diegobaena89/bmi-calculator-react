@@ -15,10 +15,16 @@ export const GridItem = ({ item }: Props) => {
         {item.icon === "down" && <img src={downImage} alt="" width={30} />}
       </div>
       <div className={styles.gridTitle}>{item.title}</div>
+
+      {item.yourBmi && (
+        <div className={styles.yourBmi}>Your Bmi is {item.yourBmi} kg/m².</div>
+      )}
+
       <div className={styles.gridInfo}>
-          <>
-            BMI is between <strong>{item.bmi[0]}</strong> and <strong>{item.bmi[1]}</strong>
-          </>
+        <>
+          BMI is between <strong>{item.bmi[0]}</strong> and{" "}
+          <strong>{item.bmi[1]}</strong>
+        </>
       </div>
     </div>
   );

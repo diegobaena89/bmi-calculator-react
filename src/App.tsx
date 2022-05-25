@@ -1,19 +1,27 @@
 import { useState } from "react";
 import styles from "./App.module.css";
 import poweredImage from "./assets/powered.png";
-import { levels, calculateBmi } from "./helpers/bmi";
-import { GridItem } from './components/GridItem/GridItem'
+import { levels, calculateBmi, Level } from "./helpers/bmi";
+import { GridItem } from "./components/GridItem/GridItem";
+import leftArrowImage from "./assets/leftarrow.png";
 
 const App = () => {
   const [heightField, setHeightField] = useState<number>(0);
   const [weightField, setWeightField] = useState<number>(0);
+  const [toShow, setToShow] = useState<Level | null>(null);
 
   const handleCalculateButton = () => {
     if (heightField && weightField) {
-      alert("Fill all fields!");
+      setToShow(calculateBmi(heightField, weightField));
     } else {
       alert("Fill all fields!");
     }
+  };
+
+  const handleBackButton = () => {
+    setToShow(null);
+    setHeightField(0);
+    setWeightField(0);
   };
 
   return (
@@ -49,11 +57,26 @@ const App = () => {
           <button onClick={handleCalculateButton}>Calculate</button>
         </div>
         <div className={styles.rightSide}>
-          <div className={styles.grid}>
-            {levels.map((item, key) => (
-              <GridItem key={key} item={item} />
-            ))}
-          </div>
+          {!toShow && (
+            <div className={styles.grid}>
+              {levels.map((item, key) => (
+                <GridItem key={key} item={item} />
+              ))}
+            </div>
+          )}
+          {toShow && (
+            <div className={styles.rightBig}>
+              <div className={styles.rightArrow} onClick={handleBackButton}>
+                <img
+                  src={leftArrowImage}
+                  alt=""
+                  width={35}
+                  style={{ marginLeft: "14px" }}
+                />
+              </div>
+              <GridItem item={toShow} />
+            </div>
+          )}
         </div>
       </div>
     </div>
